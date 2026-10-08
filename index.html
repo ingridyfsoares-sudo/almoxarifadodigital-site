@@ -265,30 +265,32 @@
     .ic-smoke .p{opacity:0}
   }
   /* ---- Passo a passo e respostas rápidas (referência: protótipo do site) ---- */
-  .hero-notes{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-  .hero-notes li{font-size:12.5px;color:rgba(255,255,255,.86);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px 12px}
-  #fluxo{background:var(--card)}
-  .fluxo{max-width:880px}
-  .fluxo .picker button{min-height:44px;padding:8px 16px}
-  .fluxo-corpo{display:grid;grid-template-columns:1.15fr 1fr;gap:28px;align-items:center;margin-top:18px}
-  .fluxo-rot{display:block;font-size:12px;font-weight:600;color:var(--muted)}
-  .fluxo-txt h3{font-size:clamp(20px,2.6vw,26px);margin:8px 0}
-  .fluxo-txt p{color:var(--muted);margin:0 0 14px;font-size:15px}
-  .fluxo-txt .fluxo-log{display:flex;align-items:center;gap:8px;color:var(--ok);font-weight:600;font-size:14px}
-  .fluxo-txt .fluxo-log::before{content:"✔";font-weight:700}
-  .fluxo-saldo{text-align:center;padding:28px 20px;background:var(--sand);border:1px solid var(--line);border-top:3px solid var(--dourado);border-radius:16px}
-  .fluxo-saldo>span{font-size:13px;color:var(--muted)}
-  .fluxo-saldo>strong{display:block;font-family:var(--fh);font-size:clamp(40px,7vw,56px);line-height:1.2;margin:6px 0}
-  .fluxo-saldo strong small{font-size:18px;font-weight:500;color:var(--muted)}
-  .fluxo-eq{font-size:13px;color:var(--muted)}
-  .fluxo-saldo p{font-size:12px;color:var(--muted);margin:14px 0 0}
   #duvidas{background:var(--card)}
   .faq{max-width:720px}
   .faq details{border-bottom:1px solid var(--line);padding:6px 0}
   .faq summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-family:var(--fh);font-weight:600;font-size:15px}
   .faq summary:focus-visible{outline:2px solid var(--dourado);outline-offset:2px}
   .faq details p{margin:0 0 14px;color:var(--muted);font-size:15px;max-width:60ch}
-  @media(max-width:720px){.fluxo-corpo{grid-template-columns:1fr;gap:18px}}
+  /* ---- Perguntas rápidas no contato (monta a mensagem do WhatsApp) ---- */
+  .qualif{max-width:640px;margin:26px auto 0;text-align:left}
+  .qualif h3{color:#fff;font-size:clamp(17px,2.2vw,20px);text-align:center}
+  #contato .qualif .qualif-nota{text-align:center;font-size:13px;margin:6px auto 18px;max-width:50ch}
+  .qualif fieldset.q{border:0;margin:0 0 16px;padding:0;min-width:0}
+  .qualif legend{padding:0;margin-bottom:8px;font-family:var(--fh);font-weight:600;font-size:14px;color:#fff}
+  .qualif legend small{font-weight:400;color:rgba(255,255,255,.7)}
+  .qualif .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .qualif label{position:relative;display:inline-flex}
+  .qualif input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+  .qualif label span{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border:1.5px solid rgba(255,255,255,.3);border-radius:999px;color:rgba(255,255,255,.9);font-size:14px;transition:background .15s ease,border-color .15s ease}
+  .qualif label:hover span{border-color:var(--dourado)}
+  .qualif input:checked+span{background:var(--dourado);border-color:var(--dourado);color:#141414;font-weight:600}
+  .qualif input:focus-visible+span{outline:3px solid #fff;outline-offset:2px}
+  .picker.passos{margin:14px 0 0}
+  .picker.passos button{min-height:40px}
+  .picker.passos button[aria-pressed="true"]{background:var(--dourado);border-color:var(--dourado);color:#141414}
+  .passo-log{margin:10px 0 0;padding:11px 14px;background:var(--sand);border-left:3px solid var(--dourado);border-radius:8px;font-size:13px;line-height:1.5}
+  .passo-log strong{display:block;font-family:var(--fh);font-size:13.5px;color:var(--ink)}
+  .passo-log span{color:var(--muted)}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -329,8 +331,7 @@
       <h1>O almoxarifado <br>da sua empresa, controlado <br>de ponta a ponta.</h1>
       <p class="sub">O Almoxarifado Digital registra entrada, saída, equipamentos locados e requisições num lugar só — cada item com código, cada retirada com responsável. No navegador e no celular, com modo offline pro canteiro.</p>
 
-      <ul class="hero-notes" aria-label="Destaques"><li>No computador e no celular</li><li>Consulta pelo QR Code</li><li>Exemplos ilustrativos, sem dados reais</li></ul>
-<div class="switcher">
+      <div class="switcher">
         <div class="seg-ctrl" role="group" aria-label="Comparar">
           <button type="button" id="v-xls" aria-pressed="true">Na planilha</button>
           <button type="button" id="v-app" aria-pressed="false">No app</button>
@@ -479,7 +480,7 @@
       <div class="head">
         <p class="kicker">Demonstração</p>
         <h2>Veja a plataforma com exemplos do seu segmento</h2>
-        <p>Selecione o segmento e adicione um item para ver a lista se atualizar.</p>
+        <p>Escolha o segmento e acompanhe o caminho de um material: receber, consultar, entregar e acompanhar. Exemplo ilustrativo, sem dados reais.</p>
       </div>
       <div class="frame" style="max-width:620px">
         <div class="bar"><i></i><i></i><i></i></div>
@@ -494,45 +495,19 @@
             <button type="button" data-seg="agro" aria-pressed="false">Agro</button>
           </div>
           <table class="t"><thead><tr><th>Item</th><th>Ref.</th><th>Saldo</th><th>Situação</th></tr></thead><tbody id="rows"></tbody></table>
-          <button type="button" class="addbtn" id="addbtn">+ Adicionar item</button>
+          <div class="picker passos" id="passos" role="group" aria-label="Etapas do caminho do material">
+            <button type="button" data-passo="0" aria-pressed="false">1 · Receber</button>
+            <button type="button" data-passo="1" aria-pressed="false">2 · Consultar</button>
+            <button type="button" data-passo="2" aria-pressed="false">3 · Entregar</button>
+            <button type="button" data-passo="3" aria-pressed="false">4 · Acompanhar</button>
+          </div>
+          <p class="passo-log" id="passoLog" role="status" aria-live="polite"><strong>Clique em uma etapa</strong><span>O primeiro item da lista muda a cada passo.</span></p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="fluxo">
-  <div class="wrap">
-    <div class="head">
-      <p class="kicker">Passo a passo</p>
-      <h2>Veja o material percorrer o caminho completo</h2>
-      <p>Uma simulação simples, com dados fictícios. Clique nas etapas para acompanhar o saldo.</p>
-    </div>
-    <div class="fluxo">
-      <div class="picker" id="fluxoPassos" role="group" aria-label="Etapas da demonstração">
-        <button type="button" data-passo="0" aria-pressed="true">1 · Receber</button>
-        <button type="button" data-passo="1" aria-pressed="false">2 · Consultar</button>
-        <button type="button" data-passo="2" aria-pressed="false">3 · Entregar</button>
-        <button type="button" data-passo="3" aria-pressed="false">4 · Acompanhar</button>
-      </div>
-      <div class="fluxo-corpo" aria-live="polite">
-        <div class="fluxo-txt">
-          <span class="fluxo-rot">Demonstração · Silicone acético</span>
-          <h3 id="fluxoTitulo"></h3>
-          <p id="fluxoDesc"></p>
-          <p class="fluxo-log" id="fluxoLog"></p>
-          <button type="button" class="btn btn--primary" id="fluxoProx"></button>
-        </div>
-        <div class="fluxo-saldo">
-          <span>Saldo disponível</span>
-          <strong id="fluxoSaldo"></strong>
-          <div class="fluxo-eq" id="fluxoEq"></div>
-          <p>Estoque de exemplo · Sem alteração de dados reais</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section id="origem">
+  <section id="origem">
     <div class="wrap about">
       <div class="foto" role="img" aria-label="Ingrid Figueiredo"></div>
       <div class="txt">
@@ -566,8 +541,45 @@
       <div class="box">
         <h2>Solicite uma demonstração</h2>
         <p>Requisição, recibo e conferência passam a registro digital: menos formulário impresso, menos pasta parada e menos retrabalho para localizar cada retirada.</p>
+        <form class="qualif" id="qualif" aria-labelledby="qualifTitulo" novalidate>
+          <h3 id="qualifTitulo">Conte um pouco sobre a sua operação</h3>
+          <p class="qualif-nota">Opcional e rápido. As respostas vão só na mensagem que você enviar pelo WhatsApp; nada é guardado no site.</p>
+          <fieldset class="q" data-q="segmento"><legend>Em qual segmento você atua?</legend>
+            <div class="opts">
+              <label><input type="radio" name="segmento" value="Construção civil"><span>Construção civil</span></label>
+              <label><input type="radio" name="segmento" value="Saúde e hospitalar"><span>Saúde e hospitalar</span></label>
+              <label><input type="radio" name="segmento" value="Indústria"><span>Indústria</span></label>
+              <label><input type="radio" name="segmento" value="Varejo e distribuição"><span>Varejo e distribuição</span></label>
+              <label><input type="radio" name="segmento" value="Serviços e facilities"><span>Serviços e facilities</span></label>
+              <label><input type="radio" name="segmento" value="Agronegócio"><span>Agronegócio</span></label>
+              <label><input type="radio" name="segmento" value="Outro"><span>Outro</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="q" data-q="unidades"><legend>Quantas unidades você controla (obras, filiais, setores)?</legend>
+            <div class="opts">
+              <label><input type="radio" name="unidades" value="1"><span>1</span></label>
+              <label><input type="radio" name="unidades" value="2 a 5"><span>2 a 5</span></label>
+              <label><input type="radio" name="unidades" value="Mais de 5"><span>Mais de 5</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="q" data-q="controle"><legend>O que você quer controlar? <small>(pode marcar mais de um)</small></legend>
+            <div class="opts">
+              <label><input type="checkbox" name="controle" value="Materiais"><span>Materiais</span></label>
+              <label><input type="checkbox" name="controle" value="EPI"><span>EPI</span></label>
+              <label><input type="checkbox" name="controle" value="Equipamentos locados"><span>Equipamentos locados</span></label>
+              <label><input type="checkbox" name="controle" value="Requisições"><span>Requisições</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="q" data-q="hoje"><legend>Como você controla hoje?</legend>
+            <div class="opts">
+              <label><input type="radio" name="hoje" value="Planilha"><span>Planilha</span></label>
+              <label><input type="radio" name="hoje" value="Papel"><span>Papel</span></label>
+              <label><input type="radio" name="hoje" value="Outro sistema"><span>Outro sistema</span></label>
+            </div>
+          </fieldset>
+        </form>
         <div class="cta">
-          <a class="btn btn--wa" href="https://wa.me/5579996260677?text=Ol%C3%A1%2C%20quero%20uma%20demonstra%C3%A7%C3%A3o%20do%20Almoxarifado%20Digital">Falar no WhatsApp <svg viewBox="0 0 24 24"><use href="#i-wa"/></svg></a>
+          <a class="btn btn--wa" id="qualifWa" href="https://wa.me/5579996260677?text=Ol%C3%A1%2C%20quero%20uma%20demonstra%C3%A7%C3%A3o%20do%20Almoxarifado%20Digital">Falar no WhatsApp <svg viewBox="0 0 24 24"><use href="#i-wa"/></svg></a>
           <a class="btn btn--ghost" href="https://app.almoxarifadodigital.com">Já tenho conta</a>
         </div>
         <p class="mail">Ou escreva para <a href="mailto:contato@almoxarifadodigital.com">contato@almoxarifadodigital.com</a></p>
@@ -677,36 +689,53 @@
     var cur="construcao";
     function cell(v){return Array.isArray(v)?'<span class="pill pill--'+(v[0]==="at"?"at":v[0]==="vn"?"vn":"ok")+'">'+v[1]+'</span>':v;}
     function rowHtml(r,isNew){return '<tr'+(isNew?' class="new"':'')+'>'+r.map(function(c){return '<td>'+cell(c)+'</td>';}).join('')+'</tr>';}
-    function render(){rows.innerHTML=seg[cur].rows.map(function(r){return rowHtml(r,false);}).join('');}
-    pbtns.forEach(function(b){b.addEventListener("click",function(){pbtns.forEach(function(x){x.setAttribute("aria-pressed",String(x===b));});cur=b.getAttribute("data-seg");render();});});
-    if(addbtn){addbtn.addEventListener("click",function(){rows.insertAdjacentHTML("beforeend",rowHtml(seg[cur].novo,true));});}
+    var FLUXO={construcao:[20,10],saude:[10,5],industria:[4,2],varejo:[6,4],servicos:[50,20],agro:[6,3]};
+    var etapa=-1, passos=document.getElementById("passos"), logEl=document.getElementById("passoLog");
+    function partes(s){var m=/^([\d.,]+)\s*(.*)$/.exec(s);return {n:parseFloat(String(m[1]).replace(",",".")),u:m[2]};}
+    function saldoDaEtapa(base,f,e){return e<0?base:(e<2?base+f[0]:base+f[0]-f[1]);}
+    function textoEtapa(e,nome,ref,u,base,f){
+      var ent=base+f[0], fim=ent-f[1];
+      return [
+        ["Entrada registrada","Recebimento de "+f[0]+" "+u+" de "+nome+", com lote e identificação. Saldo: "+base+" + "+f[0]+" = "+ent+" "+u+"."],
+        ["Ficha consultada pelo QR Code","Item, lote "+ref+" e saldo ("+ent+" "+u+") no mesmo lugar, sem procurar em planilha."],
+        ["Entrega registrada","Requisição de "+f[1]+" "+u+" atendida, com quem recebeu. Saldo: "+ent+" − "+f[1]+" = "+fim+" "+u+"."],
+        ["Estoque e histórico atualizados","A gestão vê as duas movimentações (+"+f[0]+" e −"+f[1]+") e o saldo de "+fim+" "+u+"."]
+      ][e];
+    }
+    function render(){
+      var lista=seg[cur].rows.map(function(r){return r.slice();});
+      if(etapa>=0){var p=partes(lista[0][2]),f=FLUXO[cur];lista[0][2]=saldoDaEtapa(p.n,f,etapa)+" "+p.u;}
+      rows.innerHTML=lista.map(function(r,i){return rowHtml(r,etapa>=0&&i===0);}).join('');
+      if(logEl){
+        if(etapa<0){logEl.innerHTML="<strong>Clique em uma etapa</strong><span>O primeiro item da lista muda a cada passo.</span>";}
+        else{var q=partes(seg[cur].rows[0][2]),t=textoEtapa(etapa,seg[cur].rows[0][0],seg[cur].rows[0][1],q.u,q.n,FLUXO[cur]);logEl.innerHTML="<strong>"+t[0]+"</strong><span>"+t[1]+"</span>";}
+      }
+      if(passos){[].slice.call(passos.querySelectorAll("button")).forEach(function(b){b.setAttribute("aria-pressed",String(Number(b.getAttribute("data-passo"))===etapa));});}
+    }
+    if(passos){passos.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;etapa=Number(b.getAttribute("data-passo"));render();});}
+    pbtns.forEach(function(b){b.addEventListener("click",function(){pbtns.forEach(function(x){x.setAttribute("aria-pressed",String(x===b));});cur=b.getAttribute("data-seg");etapa=-1;render();});});
+
     render();
   })();
 </script>
 
+
 <script>
   (function(){
-    var estados=[
-      ["Entrada registrada.","O estoque tinha 100 unidades. O recebimento de 20 unidades foi registrado com lote e identificação do material.","Recebimento de 20 UN","120","100 anteriores + 20 recebidas","Consultar material"],
-      ["Ficha do material consultada.","A consulta pelo QR Code mostra o silicone acético, a apresentação de 280 g e a unidade de estoque UN, tudo separado.","Material identificado · Saldo consultado","120","Consulta mantém o saldo de 120 UN","Registrar entrega"],
-      ["Entrega registrada.","Uma requisição de 10 unidades foi atendida. A entrega identifica quem recebeu e registra a saída do material.","Entrega de 10 UN registrada","110","120 disponíveis − 10 entregues","Acompanhar estoque"],
-      ["Estoque atualizado.","O saldo e o histórico refletem a entrega. A gestão consulta a movimentação registrada e a sua unidade.","Histórico e saldo atualizados","110","Saldo após a entrega: 110 UN","Recomeçar demonstração"]
-    ];
-    var box=document.getElementById("fluxoPassos"); if(!box) return;
-    var btns=[].slice.call(box.querySelectorAll("button")), passo=0;
-    function mostrar(n){
-      passo=n; var d=estados[n];
-      btns.forEach(function(b){b.setAttribute("aria-pressed",String(Number(b.getAttribute("data-passo"))===n));});
-      document.getElementById("fluxoTitulo").textContent=d[0];
-      document.getElementById("fluxoDesc").textContent=d[1];
-      document.getElementById("fluxoLog").textContent=d[2];
-      document.getElementById("fluxoSaldo").innerHTML=d[3]+" <small>UN</small>";
-      document.getElementById("fluxoEq").textContent=d[4];
-      document.getElementById("fluxoProx").textContent=d[5];
+    var f=document.getElementById("qualif"), wa=document.getElementById("qualifWa");
+    if(!f||!wa) return;
+    var base="Olá, quero uma demonstração do Almoxarifado Digital.";
+    function valor(nome){var m=[].slice.call(f.querySelectorAll('input[name="'+nome+'"]:checked')).map(function(i){return i.value;});return m.join(", ");}
+    function montar(){
+      var linhas=[base], seg=valor("segmento"), uni=valor("unidades"), ctr=valor("controle"), hoje=valor("hoje");
+      if(seg) linhas.push("Segmento: "+seg);
+      if(uni) linhas.push("Unidades: "+uni);
+      if(ctr) linhas.push("Quero controlar: "+ctr);
+      if(hoje) linhas.push("Hoje uso: "+hoje);
+      wa.href="https://wa.me/5579996260677?text="+encodeURIComponent(linhas.join("\n"));
     }
-    btns.forEach(function(b){b.addEventListener("click",function(){mostrar(Number(b.getAttribute("data-passo")));});});
-    document.getElementById("fluxoProx").addEventListener("click",function(){mostrar((passo+1)%estados.length);});
-    mostrar(0);
+    f.addEventListener("change",montar); f.addEventListener("submit",function(e){e.preventDefault();});
+    montar();
   })();
 </script>
 </body>
